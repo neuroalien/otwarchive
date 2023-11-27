@@ -19,4 +19,10 @@ class WorkPolicy < UserCreationPolicy
   def set_spam?
     user_has_roles?(%w[superadmin policy_and_abuse])
   end
+
+  def remove_pseud?
+    user_has_roles?(%w[superadmin policy_and_abuse support]) &&
+      (record.pseuds & User.orphan_account.pseuds.where.not(is_default: true)).any?
+  end
+  alias confirm_remove_pseud? remove_pseud?
 end

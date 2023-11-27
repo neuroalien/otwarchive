@@ -1,0 +1,8 @@
+<h2><%= t(".remove_pseud.page_heading") %></h2>
+
+<p>
+  <%= t(".remove_pseud.caution_notice") %>
+  <%= link_to t(".remove_pseud.yes_remove"),
+    remove_pseud_admin_user_creation_path(@creation, creation_type: Work),
+    method: :destroy %>
+</p>

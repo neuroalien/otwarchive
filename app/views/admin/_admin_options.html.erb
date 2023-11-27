@@ -37,6 +37,11 @@
           <% end %>
         </li>
       <% end %>
+      <% if policy(@work).remove_pseud? %>
+        <li>
+          <%= link_to t(".remove_pseud"), confirm_remove_pseud_admin_user_creation_path(@work, creation_type: @work.class) %>
+        </li>
+      <% end %>
     <% end %>
     <% if item.class == ExternalWork %>
       <% if policy(item).edit? %>

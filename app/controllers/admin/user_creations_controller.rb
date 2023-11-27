@@ -48,6 +48,18 @@ class Admin::UserCreationsController < Admin::BaseController
     redirect_to polymorphic_path(@creation)
   end
 
+  def confirm_remove_pseud
+    authorize @creation
+  end
+
+  def remove_pseud
+    authorize @creation
+
+    @creation.pseuds.first.change_ownership(@creation, User.orphan_account.default_pseud)
+
+    redirect_to polymorphic_path(@creation)
+  end
+
   def destroy
     authorize @creation
     AdminActivity.log_action(current_admin, @creation, action: "destroy", summary: @creation.inspect)
